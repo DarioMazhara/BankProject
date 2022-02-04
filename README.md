@@ -12,6 +12,14 @@ Similarly, a user is also given a debit card upon creating an account, which is 
 the same account so it affects the balance. All transactions are added to a list of transactions. Debit cards can be used even if the user is not logged in. 
 Logging in/out only affects whether or not a user can access 'online banking' features, which are just bank transfers and viewing balance/statements.
 
+#Relevant Concepts used (so far)
+- Objected oriented programming
+- A little usage of data structures (vectors, maps)
+- Pointers/references
+
+This project is me getting familiar with c++ so it is very basic and only implements a few concepts.
+Next on todo is experimenting more with data structures and algorithms.
+
 TODO:
 
 Add credit cards
