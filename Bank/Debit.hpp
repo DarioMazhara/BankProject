@@ -22,18 +22,24 @@ private:
     double* card_balance;
 
 public:
+    Debit() {
+        linked_account = nullptr;
+        card_balance = nullptr;
+    }
+    Debit(Account& acc_ref, double& bal_ref) {
+        linked_account = &acc_ref;
+        card_balance = &bal_ref;
+    }
     
-    Debit(Account*);
-    
-    double get_card_balance() {return *card_balance;}
+    void process_post(std::string, double);
     
     void pay(std::string, double);
     
-    void deposit(int);
+    void deposit(double);
     
-    void withdraw(int);
+    void withdraw(double);
     
-    double* get_balance() { return card_balance;}
+    double get_balance() { return *card_balance;}
 };
     
 #endif /* Debit_hpp */

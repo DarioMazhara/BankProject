@@ -11,35 +11,44 @@
 
 #include <stdio.h>
 #include <map>
+#include <vector>
 #include<string>
-
 
 
 using namespace std;
 
+
+
+static int account_number = 0;
 class Account {
 private:
-    string account_holder_name;
+    int transaction_id;
+    map<int, vector<pair<string, int>>> transactions_hash;
+    vector<pair<string, int>> transactions;
     double balance;
-    map<string, int> transactions;
-    
-    
+   // friend void set_balance(double amount);
+   
+
 public:
     int id;
     
-    Account(double);
-    
-    Account() {
-        balance = 0;
+    string account_holder;
+//    static int id;
+    Account(string name, int balance) {
+        this->id = account_number++;
+        this->balance = balance;
+        this->transaction_id = 0;
+        this->account_holder = name;
     }
     
+    void transfer(Account*, double);
     
-    void transfer(Account*);
+    void post_statement(std::string, double);
     
-    void post_statement(std::string, int);
+    double get_balance() {return balance;};
+    void set_balance(int set) {balance = set;}
     
-    double get_balance() {return balance;}
+    void statements();
     
-    void update_balance();
 };
 #endif /* Account_hpp */

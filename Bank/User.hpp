@@ -11,24 +11,37 @@
 
 #include <stdio.h>
 #include <string>
-#include "Account.hpp"
 #include "Debit.hpp"
 
+static int number_users = 0;
 class User {
 private:
-    std::string username;
-    std::string password;
+    std::string creds;
+    
+    bool logged_in;
+    
+    double account_balance;
+    
+    double* ref;
     
 public:
-    std::string get_username() {return username;}
-
-    Debit debit_card(Account*);
-    User(std::string, std::string);
-protected:
-    void set_username(std::string);
-    std::string get_password() {return password;}
+    int id;
+ //   Account* linked_account;
+    Account* account();
+    Debit* debit_card;
     
-    void set_password(std::string);
+    User() {
+        debit_card = new Debit();
+        id = number_users++;
+        logged_in = false;
+        creds = "";
+    }
+
+    
+    void signup(std::string, std::string);
+    void login(std::string);
+    
+    void logout();
     
     
     /*TODO: Make Account derived from User.

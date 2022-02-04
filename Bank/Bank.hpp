@@ -12,37 +12,38 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include "Account.hpp"
-#include "Card.hpp"
+//include "Card.hpp"
 #include "Debit.hpp"
-#include "User.hpp"
-
 
 
 class Bank {
-private:
+public:
     static int number_of_accounts;
     
     //std::vector<Employee> employees;
     //std::vector<Account> accounts;
-    static std::vector<pair<Account, double*>> bank_reference_accounts;
-    static std::map<string, Account*> account_access;
+  //  static std::vector<pair<Account*, double* > > bank_reference_accounts;
+    static std::vector<Account> accounts;
+   // static std::map<string, Account*> account_access;
+    static std::map<std::string, Account*> password_hash;
+    
+ //   friend class User;
+ //   friend class Debit;
+    
     
 public:
+   
     
-    Bank() {
-        number_of_accounts = 0;;
-    };
+    static void open_account(string, string);
+    static void close_account(int);
     
- 
-    static void open_account(User*, string);
-    static void close_account(Account*);
     
     static bool process_transaction(Account*, double);
     
    // Card issue_card(Account*);
     static Debit issue_debit(Account*);
     
+    static Account login(string);
     
 };
 

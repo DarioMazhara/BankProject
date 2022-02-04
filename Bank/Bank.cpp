@@ -10,37 +10,46 @@
 #include<string>
 #include<vector>
 #include<algorithm>
-#include "Account.cpp"
+#include <iostream>
+//#include "Account.cpp"
 
 
-void Bank::open_account(User* user, string login_credentials) {
-    number_of_accounts++;
-    
-    
-    double initial_balance = 0;
-    double* ptr = &initial_balance;
+std::vector<Account> Bank::accounts = {};
+std::map<string, Account*> Bank::password_hash = {};
+int Bank::number_of_accounts = 0;
 
-    Account new_acc(initial_balance);
+void Bank::open_account(string name, string login) {
     
-    bank_reference_accounts.push_back(make_pair(new_acc, ptr));
-    account_access[login_credentials] = &new_acc;
+    Account* ptr = new Account(name, 0);
     
+    accounts.push_back(*ptr);
+    
+    password_hash[login] = ptr;
 }
 
-void Bank::close_account(Account* account) {
-    
-    bank_reference_accounts[(account->id)-1].first = NULL;
-    number_of_accounts--;
+void Bank::close_account(int id) {
+    accounts.erase(accounts.begin() + id);
 }
+
 bool Bank::process_transaction(Account* account, double amount) {
     if (account->get_balance() + amount >= 0) {
-        *bank_reference_accounts[(account->id)-1].second = (account->get_balance() + amount);
-        
+        Bank::accounts[account->id].set_balance(account->get_balance() + amount);
+        return true;
     }
+    cout << "Insufficient funds \n";
+    return false;
+}
+
+Account Bank::login(string credentials) {
+    return accounts[password_hash[credentials]->id];
 }
 
 Debit Bank::issue_debit(Account* account) {
-    Debit new_debit(account);
+ //   Debit new_debit(account);
     
+  //  return new_debit;
+    Debit new_debit;
     return new_debit;
 }
+
+

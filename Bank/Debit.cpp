@@ -8,29 +8,29 @@
 
 #include "Debit.hpp"
 #include <iostream>
-#include "Bank.cpp"
+#include <vector>
+#include "Bank.hpp"
+
+using namespace std;
 
 
-Debit::Debit(Account* linked_account) {
-    
-    *card_balance = linked_account->get_balance();
 
-    this->linked_account = linked_account;
-    
-
+void Debit::process_post(string desc, double amount) {
+    Bank::process_transaction(linked_account, amount);
+    (*linked_account).post_statement(desc, amount);
 }
+    
+
 
 void Debit::pay(std::string item, double amount) {
-    Bank::process_transaction(linked_account, amount);
-    linked_account->post_statement(item, amount);
+    process_post("Purchase " + item, amount);
 }
 
-void Debit::deposit(int amount) {
-    Bank::process_transaction(linked_account, amount);
-    linked_account->post_statement("Deposit: ", amount);
+void Debit::deposit(double amount) {
+    process_post("Deposit", amount);
+    
 }
 
-void Debit::withdraw(int amount) {
-    Bank::process_transaction(linked_account, amount);
-    linked_account->post_statement("Withdrawal: ", amount);
+void Debit::withdraw(double amount) {
+    process_post("Withdrawal", amount);
 }
