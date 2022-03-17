@@ -1,6 +1,6 @@
 # BankProject 
 
-This is a fairly basic C++ project that I am working on as a means of learning and getting comfortable with C++.
+Small fun C++ project.
 
 This is a banking system/management project. Users can open a bank account and use it to make bank transfers to others, view their balance, and view their transactions. A user can signup for an account by providing a password, which is stored in a map as the key, with the value being the applicable account.
 Similarly, a user is also given a debit card upon creating an account, which is used for buying things, making deposits/withdrawals. The debit card is linked to 
